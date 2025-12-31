@@ -80,6 +80,10 @@ impl App {
             KeyCode::Char('k') | KeyCode::Up => self.select_prev(),
             KeyCode::Char('h') | KeyCode::Left => self.decrease_volume(),
             KeyCode::Char('l') | KeyCode::Right => self.increase_volume(),
+            KeyCode::Char(c @ '0'..='9') => {
+                let vol = (c as u8 - b'0') as f32 / 9.0;
+                self.sounds[self.selected].set_volume(vol);
+            }
             _ => {}
         }
     }
