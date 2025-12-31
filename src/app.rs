@@ -5,6 +5,7 @@ use fundsp::hacker::Shared;
 use ratatui::DefaultTerminal;
 
 use crate::audio::{AudioHandle, start_audio};
+use crate::state::State;
 use crate::ui;
 
 const VOLUME_STEP: f32 = 0.05;
@@ -41,6 +42,7 @@ pub struct App {
 
 impl App {
     pub fn new() -> color_eyre::Result<Self> {
+        let state = State::load();
         let (audio, controls) = start_audio()?;
 
         let sounds = vec![
@@ -49,6 +51,10 @@ impl App {
             Sound::new("Brown Noise", controls.brown.clone()),
             Sound::new("White Noise", controls.white.clone()),
         ];
+
+        for (i, vol) in state.volumes.iter().enumerate() {
+            sounds[i].set_volume(*vol);
+        }
 
         Ok(Self {
             sounds,
@@ -70,7 +76,20 @@ impl App {
             }
             std::thread::sleep(Duration::from_millis(16));
         }
+        self.save_state();
         Ok(())
+    }
+
+    fn save_state(&self) {
+        let state = State {
+            volumes: [
+                self.sounds[0].volume(),
+                self.sounds[1].volume(),
+                self.sounds[2].volume(),
+                self.sounds[3].volume(),
+            ],
+        };
+        state.save();
     }
 
     fn handle_key(&mut self, key: KeyEvent) {
