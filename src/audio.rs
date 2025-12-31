@@ -77,9 +77,7 @@ where
     let mut graph =
         (pink_vol * pink() + sine_vol * sine_hz(40.0) + brown_vol * brown() + white_vol * white())
             >> pan(0.0)
-            >> (declick() | declick())
-            >> (dcblock() | dcblock())
-            >> limiter_stereo(1.0, 5.0);
+            >> (clip() | clip());
 
     graph.set_sample_rate(sample_rate);
     graph.allocate();
