@@ -1,3 +1,6 @@
 [submodule "reference/fundsp"]
 	path = reference/fundsp
 	url = https://github.com/SamiPerttu/fundsp
+[submodule "reference/ratatui"]
+	path = reference/ratatui
+	url = https://github.com/ratatui/ratatui.git
