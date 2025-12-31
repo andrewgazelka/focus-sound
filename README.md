@@ -1,5 +1,7 @@
 # sound
 
+<img width="1004" height="352" alt="image" src="https://github.com/user-attachments/assets/9c970ff9-8a28-49e5-9990-c78f8b0f37ed" />
+
 TUI sound mixer for focus, built with [fundsp](https://github.com/SamiPerttu/fundsp) and [ratatui](https://github.com/ratatui/ratatui).
 
 ## Why pink noise + 40Hz?
